@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
  */
 public class CLHLock {
     public static class CLHNode {
-        private boolean isLocked = true; // 默认是在等待锁
+        private volatile boolean isLocked = true; // 默认是在等待锁
     }
 
     @SuppressWarnings("unused")

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by guoxuedong on 2015/6/25.
@@ -21,12 +22,14 @@ public class Hello {
 
     public static int count = 0;
     //public ReentrantLock lock = new ReentrantLock();
-    CLHSpinLock lock = new CLHSpinLock();
+    //CLHSpinLock lock = new CLHSpinLock();
+    CLHLock lock = new CLHLock();
 
     public void add(int n) {
-        lock.lock();
+        CLHLock.CLHNode node = new CLHLock.CLHNode();
+        lock.lock(node);
         count += n;
-        lock.unlock();
+        lock.unlock(node);
     }
 
     public void run_add(boolean debug) throws InterruptedException {
