@@ -17,11 +17,9 @@ import java.nio.charset.Charset;
 public class RemoveComments {
 
     public static void main(String[] args) throws IOException {
-        System.out.println("remove comments in format \"//blabla \"or \"/* blabla */\"");
 
         RemoveComments rc = new RemoveComments();
-
-        String data = FileUtils.readFileToString(new File("/tmp/ab.java"), Charset.defaultCharset());
+        String data = FileUtils.readFileToString(new File(RemoveComments.class.getResource("/RemoveCommentsCode.java").getPath()), Charset.defaultCharset());
         String result = rc.removeComments(data);
         System.out.println(result);
     }

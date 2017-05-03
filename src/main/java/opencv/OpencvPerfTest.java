@@ -95,12 +95,14 @@ public class OpencvPerfTest {
                 Mat outImg = null;
                 try {
                     long start = System.currentTimeMillis();
-                    Size size = Imgcodecs.imsize(orig);
+                    //Size size = Imgcodecs.imsize(orig);
+                    Size size = new Size();
 
                     Size dst = calculateSize((int) size.width, (int) size.height, dstWidth, dstHeight);
 
                     if (useFpga.equals("fpga")) {
-                        outImg = Imgcodecs.imread(orig, (int) dst.width, (int) dst.height, Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
+                        //outImg = Imgcodecs.imread(orig, (int) dst.width, (int) dst.height, Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
+                        outImg = Imgcodecs.imread(orig, Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
                     } else {
                         inImg = Imgcodecs.imread(orig);
                         outImg = new Mat();
