@@ -1,20 +1,17 @@
-package com.hello;
+package com.clhlock;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 /**
  * Created by guoxuedong on 15-6-25.
  */
-public class HelloTest {
+public class CLHLockTestTest {
     @Test
     public void test() throws IOException {
         String path = "/tmp/xx.log";
@@ -29,9 +26,10 @@ public class HelloTest {
 
         FileReader fileReader = new FileReader(path);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            System.out.println(line);
-        }
+        String line = bufferedReader.readLine();
+        Assert.assertEquals(hello, line);
+
+        line = bufferedReader.readLine();
+        Assert.assertEquals(world, line);
     }
 }

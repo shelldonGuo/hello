@@ -1,14 +1,14 @@
-package com.hello;
+package com.clhlock;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-public class CLHSpinLock {
+public class CLHLock1 {
 
     private final ThreadLocal<Node> prev;
     private final ThreadLocal<Node> current;
     private final AtomicReference<Node> tail = new AtomicReference<Node>(new Node());
 
-    public CLHSpinLock() {
+    public CLHLock1() {
         current = new ThreadLocal<Node>() {
             protected Node initialValue() {
                 return new Node();
