@@ -12,7 +12,7 @@ public class RemoveCommentsFSM {
     int[][] fsm = new int[10][128];
 
     public static void main(String[] args) throws Exception {
-        File input = new File(RemoveComments.class.getResource("/RemoveCommentsCode.java").getPath());
+        File input = new File(RemoveCommentsFSM.class.getResource("/RemoveCommentsCode.java").getPath());
 
         RemoveCommentsFSM rc = new RemoveCommentsFSM();
         rc.initFSM();

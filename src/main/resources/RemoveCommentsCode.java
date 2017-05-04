@@ -4,6 +4,8 @@ import java.io.File;
 /**
  * Created by guoxuedong on 17-5-3.
  * code with some comments
+ * in format // and /*
+ *
  */
 public class RemoveCommentsCode {
 
