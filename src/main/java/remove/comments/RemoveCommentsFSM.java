@@ -63,14 +63,14 @@ public class RemoveCommentsFSM {
         BufferedReader br = new BufferedReader(new FileReader(in));
         while ((c = br.read()) != -1) {
             state = fsm[state][c];
-            temp += (char) c;
+            temp += Character.toString((char) c);
 
             switch (state) {
                 case 0:
                     System.out.print(temp);
                     temp = "";
-
                     break;
+
                 case 9:
                     //注释结束态，输出注释中的换行
                     char[] cbuf = temp.toCharArray();
