@@ -11,14 +11,12 @@ public class RemoveCommentsFSM {
 
     int[][] fsm = new int[10][128];
 
-
     public static void main(String[] args) throws Exception {
-        RemoveCommentsFSM rcfsm = new RemoveCommentsFSM();
-        rcfsm.initFSM();
-
         File input = new File(RemoveComments.class.getResource("/RemoveCommentsCode.java").getPath());
-        rcfsm.handleFile(input);
 
+        RemoveCommentsFSM rc = new RemoveCommentsFSM();
+        rc.initFSM();
+        rc.process(input);
     }
 
     public void initFSM() {
@@ -35,6 +33,7 @@ public class RemoveCommentsFSM {
             fsm[8][i] = 7;
             fsm[9][i] = 0;
         }
+
         fsm[0]['/'] = 1;
         fsm[0]['"'] = 5;
         fsm[0]['\''] = 7;
@@ -52,15 +51,9 @@ public class RemoveCommentsFSM {
         fsm[9]['/'] = 1;
         fsm[9]['"'] = 5;
         fsm[9]['\''] = 7;
-
     }
 
-    public char parseInt(int a) {
-        char result = (char) a;
-        return result;
-    }
-
-    public void handleFile(File in) throws Exception {
+    public void process(File in) throws Exception {
 
         int c;
         String temp = "";
@@ -69,24 +62,24 @@ public class RemoveCommentsFSM {
 
         BufferedReader br = new BufferedReader(new FileReader(in));
         while ((c = br.read()) != -1) {
-
             state = fsm[state][c];
-            temp = temp + parseInt(c);
+            temp += (char) c;
+
             switch (state) {
                 case 0:
                     System.out.print(temp);
                     temp = "";
+
                     break;
                 case 9:
-                    //注释结束态，将除了换行的字符全部替换为“ ”输出。
+                    //注释结束态，输出注释中的换行
                     char[] cbuf = temp.toCharArray();
-                    for (int i = 0; i < cbuf.length; i++) {
-                        if (cbuf[i] != '\n') {
-                            cbuf[i] = ' ';
+                    for (char ch : cbuf) {
+                        if (ch == '\n') {
+                            System.out.println();
                         }
                     }
 
-                    System.out.print(cbuf);
                     temp = "";
                     break;
             }
